@@ -27,8 +27,8 @@ metadata:
   name: golang-wiki
   namespace: ${KUBE_NAMESPACE}
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: cp-reference-app-migration
-    external-dns.alpha.kubernetes.io/aws-weight: "0"
+    external-dns.alpha.kubernetes.io/set-identifier: golang-wiki-development-blue
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
 spec:
   tls:
   - hosts:
