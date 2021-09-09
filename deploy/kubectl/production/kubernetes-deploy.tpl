@@ -32,9 +32,9 @@ metadata:
 spec:
   tls:
   - hosts:
-    - cp-reference.apps.live-1.cloud-platform.service.justice.gov.uk
+    - cp-ref-gh-action.apps.live-1.cloud-platform.service.justice.gov.uk
   rules:
-  - host: cp-reference.apps.live-1.cloud-platform.service.justice.gov.uk
+  - host: cp-ref-gh-action.apps.live-1.cloud-platform.service.justice.gov.uk
     http:
       paths:
       - path: /
