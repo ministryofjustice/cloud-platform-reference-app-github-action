@@ -1,4 +1,4 @@
-IMAGE := json0/go-reference-app
+IMAGE := ministryofjustice/github-action-go-reference-app
 TAG := 1.3
 
 docker-build: .built-docker-image
