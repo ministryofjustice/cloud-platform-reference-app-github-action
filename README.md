@@ -33,7 +33,7 @@ Continuous Deployment of an application using [Github Actions](https://user-guid
 
 The serviceaccount has permissions to deploy to your namespace, so we will use its ca.crt and token in the pipeline. Guidence on Using your serviceaccount to authenticate to the cluster [here](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/deploying-an-app/github-actions-continuous-deployment.html#using-your-serviceaccount)
 
-### deploy applications
+### Deploy applications
 
 There are several ways to deploy applications onto the MoJ Cloud Platform, the below will show the - [helm](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/deploying-an-app/app-deploy-helm.html#deploying-an-application-to-the-cloud-platform-with-helm).
 
