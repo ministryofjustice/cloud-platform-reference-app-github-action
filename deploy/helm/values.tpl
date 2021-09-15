@@ -2,11 +2,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
 image:
-  repository: ministryofjustice/cloud-platform-githubaction-ruby
-  tag: 1.1
+  repository: ${ECR_URL}
+  tag: ${IMAGE_TAG}
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -14,16 +14,17 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  port: 4567
-  targetPort: 4567
+  port: 8082
+  targetPort: 8082
 
 ingress:
   enabled: true
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  annotations: {
+    external-dns.alpha.kubernetes.io/set-identifier: ${SET_INDENTIFIER}
+    external-dns.alpha.kubernetes.io/aws-weight: ${AWS_WEIGHT}
+  }
   hosts:
-    - host: <DNS-PREFIX>.apps.live-1.cloud-platform.service.justice.gov.uk
+    - host: cp-reference-github-actions.apps.live-1.cloud-platform.service.justice.gov.uk
       paths: /
 
   tls: []
