@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: go-wiki-app
-  namespace: jason-lab
+  name: golang-wiki
+  namespace: cloud-platform-reference-app
   labels:
-    app: go-wiki-app
+    app: golang-wiki
 spec:
   ports:
   - port: 4000
     name: http
     targetPort: 8082
   selector:
-    app: go-wiki-app
+    app: golang-wiki
