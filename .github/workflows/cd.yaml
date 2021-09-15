@@ -33,8 +33,8 @@ jobs:
           export IMAGE_TAG=${{ github.sha }}
           export SET_INDENTIFIER=${{ secrets.KUBE_NAMESPACE }}
           export AWS_WEIGHT="100"
-          cat /deploy/helm/values.tpl \ 
-            | envsubst > /deploy/helm/values.yaml
+          cat ./deploy/helm/values.tpl \ 
+            | envsubst > values.yaml
 
       - name: Authenticate to the live-1 cluster
         env:
