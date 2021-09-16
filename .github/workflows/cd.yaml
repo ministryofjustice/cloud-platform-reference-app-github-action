@@ -48,6 +48,6 @@ jobs:
       - name: Apply the updated Helm chart in live-1
         run: |
           cd deploy/helm/
-          helm upgrade myapplication . \
+          helm upgrade githubaction . \
           --values values.yaml \
           --namespace ${{ secrets.KUBE_NAMESPACE }}
