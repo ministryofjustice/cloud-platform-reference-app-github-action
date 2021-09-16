@@ -53,9 +53,9 @@ jobs:
         env:
           KUBE_CLUSTER: ${{ secrets.KUBE_CLUSTER_LIVE }}
         run: |
-          echo "${{ secrets.KUBE_CERT }}" > ca.crt
+          echo "${{ secrets.KUBE_CERT_LIVE }}" > ca.crt
           kubectl config set-cluster ${KUBE_CLUSTER_LIVE} --certificate-authority=./ca.crt --server=https://${KUBE_CLUSTER_LIVE}
-          kubectl config set-credentials deploy-user --token=${{ secrets.KUBE_TOKEN }}
+          kubectl config set-credentials deploy-user --token=${{ secrets.KUBE_TOKEN_LIVE }}
           kubectl config set-context ${KUBE_CLUSTER_LIVE} --cluster=${KUBE_CLUSTER_LIVE} --user=deploy-user --namespace=${{ secrets.KUBE_CLUSTER_LIVE }}
           kubectl config get-contexts
           kubectl config use-context ${KUBE_CLUSTER_LIVE}
