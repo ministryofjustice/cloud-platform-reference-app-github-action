@@ -3,7 +3,7 @@ name: Continuous Deployment
 on:
   workflow_dispatch:
     branches:
-      - 'main'
+      - 'update-readme'
 
 env:
   KUBE_NAMESPACE: ${{ secrets.KUBE_NAMESPACE }}
@@ -32,7 +32,7 @@ jobs:
         run: |
           export IMAGE_TAG=${{ github.sha }}
           export SET_INDENTIFIER=${{ secrets.KUBE_NAMESPACE }}
-          export AWS_WEIGHT="100" && cat ./deploy/helm/values.tpl | envsubst > values.yaml
+          export AWS_WEIGHT="100" && cat ./deploy/helm/values.tpl | envsubst > ./deploy/helm/values.yaml
 
       - name: Authenticate to the live-1 cluster
         env:
@@ -47,8 +47,6 @@ jobs:
           kubectl config use-context ${KUBE_CLUSTER}
       - name: Apply the updated Helm chart in live-1
         run: |
-          export GITHUB_SHA=${{ github.sha }}
-          export ECR_URL=${{ secrets.ECR_URL }}
           cd deploy/helm/
           helm upgrade myapplication . \
           --values values.yaml \
