@@ -54,11 +54,11 @@ jobs:
           KUBE_CLUSTER: ${{ secrets.KUBE_CLUSTER_LIVE }}
         run: |
           echo "${{ secrets.KUBE_CERT_LIVE }}" > ca.crt
-          kubectl config set-cluster ${KUBE_CLUSTER_LIVE} --certificate-authority=./ca.crt --server=https://${KUBE_CLUSTER_LIVE}
+          kubectl config set-cluster ${KUBE_CONTEXT_LIVE} --certificate-authority=./ca.crt --server=https://${KUBE_API_LIVE}
           kubectl config set-credentials deploy-user --token=${{ secrets.KUBE_TOKEN_LIVE }}
-          kubectl config set-context ${KUBE_CLUSTER_LIVE} --cluster=${KUBE_CLUSTER_LIVE} --user=deploy-user --namespace=${{ secrets.KUBE_CLUSTER_LIVE }}
+          kubectl config set-context ${KUBE_CONTEXT_LIVE} --cluster=${KUBE_CONTEXT_LIVE} --user=deploy-user --namespace=${{ secrets.KUBE_CONTEXT_LIVE }}
           kubectl config get-contexts
-          kubectl config use-context ${KUBE_CLUSTER_LIVE}
+          kubectl config use-context ${KUBE_CONTEXT_LIVE}
       - name: Apply the updated Helm chart in eks-live
         run: |
           cd deploy/helm/
