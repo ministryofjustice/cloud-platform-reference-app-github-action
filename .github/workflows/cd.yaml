@@ -33,7 +33,9 @@ jobs:
           export IMAGE_TAG=${{ github.sha }} && cat ./deploy/helm/live-1.values.tpl | envsubst > ./deploy/helm/live-1.values.yaml
       - name: Authenticate to the live-1 cluster
         env:
-          KUBE_CLUSTER: ${{ secrets.KUBE_CLUSTER }}
+          KUBE_CLUSTER_LIVE_1: ${{ secrets.KUBE_CLUSTER_LIVE_1 }}
+          KUBE_CERT_LIVE_1: ${{ secrets.KUBE_CERT_LIVE_1 }}
+          KUBE_TOKEN_LIVE_1: ${{ secrets.KUBE_TOKEN_LIVE_1 }}
         run: |
           echo "${{ secrets.KUBE_CERT_LIVE_1 }}" > ca.crt
           kubectl config set-cluster ${KUBE_CLUSTER_LIVE_1} --certificate-authority=./ca.crt --server=https://api.${KUBE_CLUSTER_LIVE_1}
@@ -54,7 +56,7 @@ jobs:
           export IMAGE_TAG=${{ github.sha }} && cat ./deploy/helm/live.values.tpl | envsubst > ./deploy/helm/live.values.yaml
       - name: Authenticate to the eks-live cluster
         env:
-          KUBE_CLUSTER: ${{ secrets.KUBE_CLUSTER_LIVE }}
+          KUBE_CLUSTER: ${{ secrets.KUBE_CLUSTER }}
         run: |
           echo "${KUBE_CERT}" > ca.crt
           kubectl config set-cluster ${KUBE_CLUSTER} --certificate-authority=./ca.crt --server=https://${KUBE_CLUSTER}
