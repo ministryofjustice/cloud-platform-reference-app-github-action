@@ -20,7 +20,7 @@ service:
 ingress:
   enabled: true
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: "githubaction-development-green"
+    external-dns.alpha.kubernetes.io/set-identifier: "githubaction-cloud-platform-reference-app-github-action-green"
     external-dns.alpha.kubernetes.io/aws-weight: "0"
   hosts:
     - host: cp-reference-github-actions.apps.live-1.cloud-platform.service.justice.gov.uk
