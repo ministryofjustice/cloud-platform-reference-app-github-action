@@ -3,7 +3,7 @@ name: Continuous Deployment
 on:
   workflow_dispatch:
     branches:
-      - 'update-readme'
+      - 'main'
 
 env:
   KUBE_NAMESPACE: ${{ secrets.KUBE_NAMESPACE }}
