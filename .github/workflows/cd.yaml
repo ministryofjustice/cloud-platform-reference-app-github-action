@@ -31,8 +31,8 @@ jobs:
           ECR_URL: ${{ secrets.ECR_URL }}
         run: |
           export IMAGE_TAG=${{ github.sha }}
-          export SET_INDENTIFIER=${{ secrets.KUBE_NAMESPACE }}
-          export AWS_WEIGHT="100" && cat ./deploy/helm/values.tpl | envsubst > ./deploy/helm/values.yaml
+          export SET_INDENTIFIER=githubaction-development-blue
+          export AWS_WEIGHT=100 && cat ./deploy/helm/values.tpl | envsubst > ./deploy/helm/values.yaml
 
       - name: Authenticate to the live-1 cluster
         env:
