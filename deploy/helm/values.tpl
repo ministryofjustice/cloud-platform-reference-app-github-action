@@ -19,10 +19,9 @@ service:
 
 ingress:
   enabled: true
-  annotations: {
-    external-dns.alpha.kubernetes.io/set-identifier: ${SET_INDENTIFIER}
-    external-dns.alpha.kubernetes.io/aws-weight: ${AWS_WEIGHT}
-  }
+  annotations:
+    external-dns.alpha.kubernetes.io/set-identifier: "${SET_INDENTIFIER}"
+    external-dns.alpha.kubernetes.io/aws-weight: "${AWS_WEIGHT}"
   hosts:
     - host: cp-reference-github-actions.apps.live-1.cloud-platform.service.justice.gov.uk
       paths: /
