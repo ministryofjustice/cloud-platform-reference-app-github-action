@@ -26,29 +26,6 @@ jobs:
           region: eu-west-2
           local-image: github-action-reference-app
           image: ${{ secrets.ECR_NAME }}:${{ github.sha }}
-      - name: Update image tag for live-1
-        env:
-          ECR_URL: ${{ secrets.ECR_URL }}
-        run: |
-          export IMAGE_TAG=${{ github.sha }} && cat ./deploy/helm/live-1.values.tpl | envsubst > ./deploy/helm/live-1.values.yaml
-      - name: Authenticate to the live-1 cluster
-        env:
-          KUBE_CLUSTER: ${{ secrets.KUBE_CLUSTER_LIVE_1 }}
-          KUBE_CERT: ${{ secrets.KUBE_CERT_LIVE_1 }}
-          KUBE_TOKEN: ${{ secrets.KUBE_TOKEN_LIVE_1 }}
-        run: |
-          echo "${KUBE_CERT}" > ca.crt
-          kubectl config set-cluster ${KUBE_CLUSTER} --certificate-authority=./ca.crt --server=https://api.${KUBE_CLUSTER}
-          kubectl config set-credentials deploy-user --token=${KUBE_TOKEN}
-          kubectl config set-context ${KUBE_CLUSTER} --cluster=${KUBE_CLUSTER} --user=deploy-user --namespace=${{ secrets.KUBE_NAMESPACE}}
-          kubectl config get-contexts
-          kubectl config use-context ${KUBE_CLUSTER}
-#       - name: Apply the updated Helm chart in live-1
-#         run: |
-#           cd deploy/helm/
-#           helm upgrade githubaction . \
-#           --values live-1.values.yaml \
-#           --namespace ${{ secrets.KUBE_NAMESPACE }}
       - name: Update image tag for eks-live
         env:
           ECR_URL: ${{ secrets.ECR_URL }}

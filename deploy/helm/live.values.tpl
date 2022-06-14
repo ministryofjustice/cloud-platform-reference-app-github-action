@@ -22,6 +22,7 @@ ingress:
   annotations:
     external-dns.alpha.kubernetes.io/set-identifier: "githubaction-cloud-platform-reference-app-github-action-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
+  className: modsec
   hosts:
     - host: cp-reference-github-actions.apps.live.cloud-platform.service.justice.gov.uk
       paths: /
