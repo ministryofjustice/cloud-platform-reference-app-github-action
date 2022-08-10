@@ -4,13 +4,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-new
+  name: githubaction-new
   labels:
 {{ include "githubaction.labels" . | indent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    external-dns.alpha.kubernetes.io/set-identifier: "githubaction-new-cloud-platform-reference-app-github-action-green"
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
 {{- if .Values.ingress.tls }}
