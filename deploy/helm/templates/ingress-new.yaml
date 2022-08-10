@@ -15,7 +15,7 @@ spec:
     - host: cp-reference-github-actions-new.apps.live.cloud-platform.service.justice.gov.uk
       http:
         paths:
-          - path: {{ $ingressPath }}
+          - path: /
             pathType: ImplementationSpecific
             backend:
               service:
