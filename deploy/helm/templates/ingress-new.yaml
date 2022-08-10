@@ -1,0 +1,38 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "githubaction.fullname" . -}}
+{{- $ingressPath := .Values.ingress.path -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-new
+  labels:
+{{ include "githubaction.labels" . | indent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+{{- if .Values.ingress.tls }}
+  tls:
+  {{- range .Values.ingress.tls }}
+    - hosts:
+      - cp-reference-github-actions-new.apps.live.cloud-platform.service.justice.gov.uk
+      secretName: {{ .secretName }}
+  {{- end }}
+{{- end }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: cp-reference-github-actions-new.apps.live.cloud-platform.service.justice.gov.uk
+      http:
+        paths:
+          - path: {{ $ingressPath }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ $fullName }}
+                port: 
+                  name: http
+
+  {{- end }}
+{{- end }}
